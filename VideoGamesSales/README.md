@@ -1,6 +1,19 @@
 # Project 2025 - VideoGamesSales
 This project is dedicated to the study of the Video Game Sales dataset, which contains information about video game sales on various platforms.
 
+### Data:
+The dataset includes the following columns:
+- `Name` – game name
+- `Platform` – platform (PS4, Xbox, PC, etc.)
+- `Year` – year of release
+- `Genre` – game genre
+- `Publisher` – publisher
+- `NA_Sales` – sales in North America (in millions of copies)
+- `EU_Sales` – sales in Europe (in millions of copies)
+- `JP_Sales` – sales in Japan (in millions of copies)
+- `Other_Sales` – sales in other regions (in millions of copies)
+- `Global_Sales` – global sales (in millions of copies)
+
 ### Project goals:
 - Data cleaning and preliminary analysis
 - Identifying the best-selling games and popular platforms
@@ -16,3 +29,6 @@ This project is dedicated to the study of the Video Game Sales dataset, which co
 ### Tools used in project:
 - Python (pandas, matplotlib, seaborn, numpy)
 - Jupyter Notebook
+
+
+**_Project Status : In development_**
