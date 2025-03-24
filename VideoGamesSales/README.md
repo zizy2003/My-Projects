@@ -21,14 +21,15 @@ The dataset includes the following columns:
 - A Study of the Influence of Genre on Sales Volume
 - Identifying sales trends by year
 -  **Data visualization:**
--    1. Sales trend chart by year
--    2.  Boxplot for comparing sales by genre
--    3. Heat map of sales correlation by region
--    4. Pie chart of sales distribution by platform
+    1. Sales trend chart by year
+    2.  Boxplot for comparing sales by genre
+    3. Heat map of sales correlation by region
+    4. Pie chart of sales distribution by platform
 
 ### Tools used in project:
-- Python (pandas, matplotlib, seaborn, numpy)
+- Python (pandas, matplotlib, numpy)
 - Jupyter Notebook
+- Tableau
 
 
 **_Project Status : In development_**
