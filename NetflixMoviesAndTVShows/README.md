@@ -1,4 +1,4 @@
-#Netflix Movies and TV Shows Data Analysis
+# Netflix Movies and TV Shows Data Analysis
 ### About
 The project aims to understand which movies and TV shows Netflix most frequently adds to the platform, which countries lead in content production, and how content changes over time.
 This analysis could help streaming platforms, media researchers, and regular users understand Netflix's content preferences. The dataset was obtained from the [Kaggle Netflix Movies and TV Shows dataset](https://www.kaggle.com/datasets/shivamb/netflix-shows?resource=download) .
