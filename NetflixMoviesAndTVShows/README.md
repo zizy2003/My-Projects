@@ -1,9 +1,11 @@
 # Netflix Movies and TV Shows Data Analysis
 ### About
+---
 The project aims to understand which movies and TV shows Netflix most frequently adds to the platform, which countries lead in content production, and how content changes over time.
 This analysis could help streaming platforms, media researchers, and regular users understand Netflix's content preferences. The dataset was obtained from the [Kaggle Netflix Movies and TV Shows dataset](https://www.kaggle.com/datasets/shivamb/netflix-shows?resource=download) .
 "Netflix is one of the most popular media and video streaming platforms. They have over 8000 movies or tv shows available on their platform, as of mid-2021, they have over 200M Subscribers globally. This tabular dataset consists of listings of all the movies and tv shows available on Netflix, along with details such as - cast, directors, ratings, release year, duration, etc." [source](https://www.kaggle.com/datasets/shivamb/netflix-shows?resource=download)
 ### Purposes Of The Project
+---
 _The goal of the project is to analyze data from the Netflix data set to identify key patterns and trends, such as:_
 
 - Distribution of films and series by genre and country,
@@ -15,6 +17,7 @@ _The goal of the project is to analyze data from the Netflix data set to identif
 - Identifying popular categories and audience preferences.
 
 ### About Data
+---
 The dataset was obtained from the [Kaggle Netflix Movies and TV Shows dataset](https://www.kaggle.com/datasets/shivamb/netflix-shows?resource=download) . This dataset contains data from various countries and covers different types of content such as movies and series. The data contains __11 columns__ and __8800 rows__ :
 | Column | Description | Data type |
 |-------------|-------------|-------------|
@@ -32,6 +35,7 @@ The dataset was obtained from the [Kaggle Netflix Movies and TV Shows dataset](h
 | description | Description of each movie/tv show | TEXT |
 
 ### Analysis List
+---
 1. Content Type Analysis🎬
 > Analyze the distribution between Movies and TV Shows. Determine which type is more dominant on the platform and how their proportions vary by country or over time.
 2. Country & Regional Trends🌍
@@ -48,9 +52,11 @@ The dataset was obtained from the [Kaggle Netflix Movies and TV Shows dataset](h
 > Examine which actors and directors appear most frequently in Netflix content. This can help identify key figures or partnerships in Netflix's content strategy.
 
 ### Approach used
+---
 --
 
 ### Business Questions To Answer
+---
 - What type of content (Movies vs TV Shows) dominates Netflix's catalog?
 
 - Which countries produce the most content available on Netflix?
@@ -66,6 +72,7 @@ The dataset was obtained from the [Kaggle Netflix Movies and TV Shows dataset](h
 - Who are the most frequently appearing actors and directors on Netflix?
 
 ### Code
+---
 
 For the rest of a code , follow the [sql_queries.sql](sql_queries.sql)
 
