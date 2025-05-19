@@ -84,3 +84,83 @@ WHERE n2.title = n.title
 GROUP BY n2.title
 HAVING COUNT(*) > 1
 );
+
+--Calculating the leading types of content on netflix(either film or tv show)
+WITH stats AS (
+  SELECT 
+    COUNT(*) AS total_titles,
+    COUNT(CASE WHEN type2 = 'Movie' THEN 1 END) AS movie_count,
+    COUNT(CASE WHEN type2 = 'TV Show' THEN 1 END) AS tv_show_count
+  FROM netflix_titles
+)
+SELECT 
+  n.*,
+  s.total_titles,
+  s.movie_count,
+  s.tv_show_count
+FROM netflix_titles n
+CROSS JOIN stats s;
+
+--Finding what countries the most produce content on netflix
+SELECT country , COUNT(*) as content_count
+FROM netflix_titles
+WHERE country IS NOT NULL
+GROUP BY country
+ORDER BY content_count DESC;
+
+--Count the amount of content by year on Netflix
+SELECT
+EXTRACT(YEAR FROM date_added)::INT as year,
+COUNT(*) as content_count
+FROM netflix_titles
+WHERE date_added IS NOT NULL
+GROUP BY year
+ORDER BY year ASC;
+--Looking for the most popular genres in data set 
+WITH genre_split AS (
+SELECT TRIM(genre) as genre
+FROM netflix_titles , 
+unnest(string_to_array(listed_in, ',')) AS genre
+WHERE listed_in IS NOT NULL 
+)
+SELECT genre , COUNT(*) as content_count FROM genre_split 
+GROUP BY genre
+ORDER BY content_count DESC
+-- Number of films and tv show by genres and rating
+WITH genre_split AS (
+SELECT TRIM(genre) as genre, rating
+FROM netflix_titles , 
+unnest(string_to_array(listed_in, ',')) AS genre
+WHERE listed_in IS NOT NULL AND rating IS NOT NULL
+)
+SELECT genre , COUNT(*) as content_count , rating FROM genre_split 
+GROUP BY genre, rating
+ORDER BY content_count DESC
+
+--Also removing an wrong row which I didn't notice in part 1 
+-- DELETE FROM netflix_titles WHERE rating = '66 min'
+
+--Finding an average film duration as well as tv show , minimal duration(in minutes) , minimal duration(in seasons for TV Show) , maximum duration and maximum duration in season for TV show.
+SELECT 
+'Movie' as type2,
+ROUND(AVG(duration),2) AS avg_film_duration,
+MIN(duration) AS min_film_duration,
+MAX(duration) AS max_fim_duration
+FROM (
+SELECT CAST(REPLACE(duration , ' min' , '') AS INTEGER) as duration
+FROM netflix_titles
+WHERE type2 = 'Movie' and duration LIKE '%min%'
+) as movie_duration
+
+UNION ALL
+
+SELECT
+'TV Show' as type2,
+ROUND(AVG(duration) ,2 ) AS avg_tv_show_duration_seasons,
+MIN(duration) AS min_tv_show_duration_seasons,
+MAX(duration) AS max_tv_show_duration_seasons
+FROM (
+SELECT CAST(REGEXP_REPLACE(duration , '[^0-9]', '' , 'g') AS INTEGER) AS duration
+FROM netflix_titles
+WHERE type2 = 'TV Show' and duration LIKE '%Seasons%'
+) as tv_show_duration;
