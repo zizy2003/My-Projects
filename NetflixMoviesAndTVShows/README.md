@@ -53,7 +53,13 @@ The dataset was obtained from the [Kaggle Netflix Movies and TV Shows dataset](h
 
 ### Approach used
 ---
---
+1. Data cleaning : 
+This is the first step where inspection of data is done to make sure NULL values and missing values are detected and data replacement methods are used to replace, missing or NULL values.
+> 1. Build a database(netflix_titles)
+> 2. Create a table
+> 3. Insert a data to this table
+> 4. Finding a NULL values , filling them with N/A. Also search for duplicates(when deleting them I leave the very first ID)
+
 
 ### Business Questions To Answer
 ---
