@@ -164,3 +164,34 @@ SELECT CAST(REGEXP_REPLACE(duration , '[^0-9]', '' , 'g') AS INTEGER) AS duratio
 FROM netflix_titles
 WHERE type2 = 'TV Show' and duration LIKE '%Seasons%'
 ) as tv_show_duration;
+
+--Finding most frequent directors and actors in dataset
+WITH director_split  AS (
+SELECT 
+TRIM(director_name) as director, COUNT(*) AS count_of_appear , 'Director' as role
+FROM netflix_titles,
+UNNEST(string_to_array(director, ',')) AS director_name
+WHERE director IS NOT NULL
+GROUP BY TRIM(director_name)
+
+)
+,
+actors_split  AS (
+SELECT 
+TRIM(actors) as cast_members, COUNT(*) AS count_of_appear , 'Actor' as role
+FROM netflix_titles,
+UNNEST(string_to_array(cast_members, ',')) AS actors
+WHERE cast_members IS NOT NULL
+GROUP BY TRIM(actors)
+) 
+
+SELECT *
+FROM (
+SELECT * FROM director_split
+UNION ALL
+SELECT * FROM actors_split
+
+) AS combined
+ORDER BY count_of_appear DESC;
+
+
