@@ -60,6 +60,28 @@ This is the first step where inspection of data is done to make sure NULL values
 > 3. Insert a data to this table
 > 4. Finding a NULL values , filling them with N/A. Also search for duplicates(when deleting them I leave the very first ID)
 
+2. Feature Engineering : Creating a new columns from existing.
+
+> 1. Created a cte with columns `movie_count` , `tv_show_count` , `total_titles` :
+This will help to understand how many lines are in movies and how many are in TV shows, for further analysis. Also join cte with main table `netflix_titles`
+   
+> 2. Created a new column named `duration_minutes`(including max duration,min duration, avg duration).
+For Movies, this extracts the duration in minutes (e.g., "90 min" → 90). For TV Shows, a different logic is applied (e.g., "2 Seasons" is handled separately).
+This helps analyze the average length of content on Netflix and understand typical viewing times. 
+
+> 3. Created a new column named `content_category`:
+Categorizes titles based on their listed genres (Action, Comedy, Documentary , etc.).
+This helps group and analyze what types of content dominate Netflix’s library.
+
+> 4. Actor/Director Splitting: The `cast` and ` director` fields were split into individual entries (`actors_split` and `director_split`), then combined into a unified column to analyze frequency and prominence of people involved in the content. A count of appearances was calculated to identify the most frequent actors and directors on the platform.
+
+> 5. Extract `year` from from the `date_added` field:
+
+These help analyze trends over time, like what years Netflix added the most content.
+
+3. Exploratory Data Analysis (EDA): Exploratory data analysis is done to answer the listed questions and aims of this project.
+
+4. Conclusion:
 
 ### Business Questions To Answer
 ---
