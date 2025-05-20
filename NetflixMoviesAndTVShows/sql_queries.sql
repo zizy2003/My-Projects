@@ -86,6 +86,7 @@ HAVING COUNT(*) > 1
 );
 
 --Calculating the leading types of content on netflix(either film or tv show)
+CREATE OR REPLACE VIEW netflix_content_stats AS
 WITH stats AS (
   SELECT 
     COUNT(*) AS total_titles,
@@ -102,6 +103,7 @@ FROM netflix_titles n
 CROSS JOIN stats s;
 
 --Finding what countries the most produce content on netflix
+CREATE OR REPLACE VIEW distribution_by_countries AS
 SELECT country , COUNT(*) as content_count
 FROM netflix_titles
 WHERE country IS NOT NULL
@@ -109,6 +111,7 @@ GROUP BY country
 ORDER BY content_count DESC;
 
 --Count the amount of content by year on Netflix
+CREATE OR REPLACE VIEW distribution_by_year AS
 SELECT
 EXTRACT(YEAR FROM date_added)::INT as year,
 COUNT(*) as content_count
@@ -117,6 +120,7 @@ WHERE date_added IS NOT NULL
 GROUP BY year
 ORDER BY year ASC;
 --Looking for the most popular genres in data set 
+CREATE OR REPLACE VIEW distribution_by_genres AS
 WITH genre_split AS (
 SELECT TRIM(genre) as genre
 FROM netflix_titles , 
@@ -127,6 +131,7 @@ SELECT genre , COUNT(*) as content_count FROM genre_split
 GROUP BY genre
 ORDER BY content_count DESC
 -- Number of films and tv show by genres and rating
+CREATE OR REPLACE VIEW distribution_by_genres_and_rating AS
 WITH genre_split AS (
 SELECT TRIM(genre) as genre, rating
 FROM netflix_titles , 
@@ -141,6 +146,7 @@ ORDER BY content_count DESC
 -- DELETE FROM netflix_titles WHERE rating = '66 min'
 
 --Finding an average film duration as well as tv show , minimal duration(in minutes) , minimal duration(in seasons for TV Show) , maximum duration and maximum duration in season for TV show.
+CREATE OR REPLACE VIEW film_tvshow__duration AS
 SELECT 
 'Movie' as type2,
 ROUND(AVG(duration),2) AS avg_film_duration,
@@ -166,6 +172,7 @@ WHERE type2 = 'TV Show' and duration LIKE '%Seasons%'
 ) as tv_show_duration;
 
 --Finding most frequent directors and actors in dataset
+CREATE OR REPLACE VIEW directors_and_artists_count AS
 WITH director_split  AS (
 SELECT 
 TRIM(director_name) as director, COUNT(*) AS count_of_appear , 'Director' as role
