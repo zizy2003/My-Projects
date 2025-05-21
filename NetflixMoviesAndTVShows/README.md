@@ -83,6 +83,10 @@ These help analyze trends over time, like what years Netflix added the most cont
 
 3. Exploratory Data Analysis (EDA): Exploratory data analysis is done to answer the listed questions and aims of this project.
 
+4. Visualization :
+
+📄 [Check visualiazation (PDF)](file:///C:/Users/lelik/AppData/Local/Temp/Power%20BI%20Desktop/print-job-1d8d640d-cb76-4dd8-b572-3f2894a3e1ed/xsassaa.pdf)
+
 4. Conclusion:
 
 ### Business Questions To Answer
