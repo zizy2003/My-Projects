@@ -85,9 +85,41 @@ These help analyze trends over time, like what years Netflix added the most cont
 
 4. Visualization : The visualization allows for a deeper understanding of the distribution of content by genre, ratings, type (movies/shows), duration, and the dynamics of new titles.
 
-📄 [Check visualiazation (PDF)](NetflixMoviesAndTVShows/reports/visualization.pdf)
+📄 [Check visualiazation (PDF)](NetflixMoviesAndTVShows/reports/)
 
 4. Conclusion:
+
+> 1. Strong geographic concentration
+The largest amount of content on the platform is from the US (≈2.5K), followed by India (1K) and the UK by a notable margin. This indicates the dominance of English and Indian content on Netflix.
+
+> 2. The peak content additions are from 2018-2020
+The Content Release Trend graph shows a sharp increase during this period, especially after 2016. This coincides with Netflix's global expansion and subscriber growth.
+
+>  3. There are almost 2.3 times more movies than shows
+Of the total 8,806 pieces of content:
+- 6,130 are movies,
+- 2,676 are TV series.
+This confirms the platform's emphasis on movies, but also shows a significant presence of TV series.
+
+>  4.Genre diversity - 19K mentions
+Most popular genres:
+- Dramas (14.5%),
+- Comedies (13.4%),
+- Documentaries (8.6%),
+
+> 5. Action & Adventure (7.5%).
+This reflects the preferences of a broad audience and Netflix's desire to cover both entertaining and educational genres.
+Movies are on average 100 minutes in length
+Range:
+- Maximum - 312 min,
+- Minimum - 3 minutes.
+TV series are measured in seasons (1-17). This gives insight into typical viewing time and audience preferences.
+
+> 6. Adult content prevails on the platform
+Analysis by age ratings and genre shows that many movies are labeled TV-MA and R, targeting audiences over 16.
+
+> 7. Recurring faces in production
+Among the actors and directors, there are those who appear 20+ times, indicating Netflix's frequent collaboration with the same professionals (e.g. Anupam Kher - 43 appearances).
 
 ### Business Questions To Answer
 ---
