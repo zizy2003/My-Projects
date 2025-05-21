@@ -85,7 +85,7 @@ These help analyze trends over time, like what years Netflix added the most cont
 
 4. Visualization : The visualization allows for a deeper understanding of the distribution of content by genre, ratings, type (movies/shows), duration, and the dynamics of new titles.
 
-📄 [Check visualiazation (PDF)]()
+📄 [Check visualiazation (PDF)](NetflixMoviesAndTVShows/reports/visualization.pdf)
 
 4. Conclusion:
 
