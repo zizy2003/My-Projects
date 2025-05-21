@@ -85,7 +85,7 @@ These help analyze trends over time, like what years Netflix added the most cont
 
 4. Visualization : The visualization allows for a deeper understanding of the distribution of content by genre, ratings, type (movies/shows), duration, and the dynamics of new titles.
 
-📄 [Check visualiazation (PDF)](NetflixMoviesAndTVShows/reports/)
+📄 [Check visualiazation (PDF)](visualization.pdf)
 
 4. Conclusion:
 
@@ -101,7 +101,7 @@ Of the total 8,806 pieces of content:
 - 2,676 are TV series.
 This confirms the platform's emphasis on movies, but also shows a significant presence of TV series.
 
->  4.Genre diversity - 19K mentions
+>  4. Genre diversity - 19K mentions
 Most popular genres:
 - Dramas (14.5%),
 - Comedies (13.4%),
