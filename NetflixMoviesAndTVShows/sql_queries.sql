@@ -200,5 +200,3 @@ SELECT * FROM actors_split
 
 ) AS combined
 ORDER BY count_of_appear DESC;
-
-
