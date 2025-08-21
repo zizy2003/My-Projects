@@ -200,3 +200,169 @@ SELECT * FROM actors_split
 
 ) AS combined
 ORDER BY count_of_appear DESC;
+
+
+--Where Netflix invests the most
+SELECT genre, 
+ROUND(content_count * 100.00 / SUM(content_count) OVER() , 2) || '%' as portfolio_percentage
+FROM distribution_by_genres
+ORDER BY content_count DESC;
+
+
+--Number 5 genres where netflix invests the most
+SELECT 
+genre, content_count,
+CASE 
+WHEN content_count > 1000 THEN 'High Investment'
+WHEN content_count > 500 THEN 'Medium Investment'
+ELSE 'Low Investment'
+END as investment_level
+
+FROM distribution_by_genres
+ORDER BY content_count DESC
+LIMIT 10;
+
+--Where netflix has a gap in content
+SELECT genre, content_count
+FROM distribution_by_genres
+WHERE content_count < 100
+ORDER BY content_count DESC;
+
+
+
+
+SELECT * from distribution_by_year
+ORDER by content_count DESC;
+
+
+SELECT * from distribution_by_genres_and_rating
+ORDER by content_count DESC
+;
+
+
+SELECT * from netflix_content_stats
+
+
+
+UPDATE netflix_titles 
+SET rating = NULL 
+WHERE rating LIKE '% min';
+
+
+--Where Netflix invests the most
+SELECT country, content_count,
+       ROUND(content_count * 100.00 / SUM(content_count) OVER(), 2) || '%' as market_share
+FROM distribution_by_countries
+WHERE country NOT LIKE '%,%'    
+ORDER BY content_count DESC;
+
+--Checking for which audition Netflix targets the most
+SELECT COUNT(*) as titles_count , rating,
+ROUND(COUNT(*) * 100.00 / SUM(COUNT(*)) OVER() , 2) || '%' as rating_percent
+
+from NETFLIX_content_stats
+WHERE rating IS NOT null
+GROUP BY rating
+ORDER BY COUNT(*) DESC
+;
+
+
+--Directors/Actors who brings more content 
+WITH collaboration_analysis AS (
+    SELECT director, role, count_of_appear,
+           CASE 
+               WHEN count_of_appear > 10 THEN 'Strategic Partner'
+               WHEN count_of_appear > 5 THEN 'Regular Collaborator'
+               ELSE 'One-Off Project'
+           END as partnership_level,
+           ROW_NUMBER() OVER (PARTITION BY role ORDER BY count_of_appear DESC) as rank_in_role
+    FROM directors_and_artists_count
+)
+SELECT 
+    role,
+    director,
+    count_of_appear,
+    partnership_level,
+    rank_in_role
+FROM collaboration_analysis
+WHERE rank_in_role <= 10 
+ORDER BY role, count_of_appear DESC;
+
+
+--Current portfolio balance
+
+SELECT movie_count, tv_show_count, total_titles,
+ROUND(movie_count * 100.00 / total_titles , 1 ) || '%' as movie_percentage,
+ROUND(tv_show_count * 100.00 / total_titles , 1 ) || '%' as tvshow_percentage
+from netflix_content_stats
+Limit 1
+;
+
+
+--Type analysis
+SELECT 
+    type2,
+    CASE 
+        WHEN type2 = 'TV Show' THEN avg_film_duration || ' seasons'
+        ELSE avg_film_duration || ' minutes'
+    END as avg_duration_with_unit,
+    
+    CASE 
+        WHEN type2 = 'TV Show' THEN min_film_duration || ' seasons'
+        ELSE min_film_duration || ' minutes'  
+    END as min_duration_with_unit,
+    
+    CASE 
+        WHEN type2 = 'TV Show' THEN max_fim_duration || ' seasons'
+        ELSE max_fim_duration || ' minutes'
+    END as max_duration_with_unit,
+    
+    (max_fim_duration - min_film_duration) as duration_range 
+FROM film_tvshow__duration
+ORDER BY avg_film_duration DESC;
+
+--Investment Analysis
+SELECT type2, avg_film_duration,
+CASE WHEN type2 = 'Movie' THEN 'Per Movie'
+ELSE 'Per Season/Episode'
+
+
+END as duration_unit,
+
+CASE
+WHEN type2 = 'Movie' AND avg_film_duration > 120 THEN 'High Production Cost'
+WHEN  type2 = 'Movie' AND avg_film_duration > 90 THEN 'Medium Production Cost'
+WHEN  type2 = 'Movie' AND avg_film_duration < 90 THEN 'Low Production Cost(<1.5h)'
+
+WHEN type2 = 'TV Show' AND avg_film_duration > 5 THEN 'High Production Cost'
+WHEN type2 = 'TV Show' AND avg_film_duration > 2 THEN 'Medium Production Cost'
+ELSE 'Low Production Cost (1-2 seasons)'
+
+
+END as production_info
+FROM film_tvshow__duration;
+
+--Time Strategy Analysis
+
+SELECT  year, content_count,
+CASE WHEN year >= 2020 THEN 'Post-Pandemic Strategy'
+WHEN year >= 2017 THEN 'Expansion Era'
+ELSE 'Early Netflix'
+END as business_phase
+
+from distribution_by_year
+WHERE year >= 2012
+ORDER by content_count DESC;
+
+
+--Cross-Analysis
+
+SELECT genre,rating, content_count,
+ROUND(content_count * 100.00 / SUM(content_count) OVER() , 2) as market_share
+
+from distribution_by_genres_and_rating
+
+Where content_count > 50
+ORDER BY content_count DESC
+LIMIT 15
+;
