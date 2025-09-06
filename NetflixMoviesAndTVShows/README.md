@@ -302,10 +302,8 @@ LIMIT 15;
 ## 📁 Project Structure
 
 ```
-netflix-analysis/
-├── data/
-│   └── netflix_titles.csv
-├── sql/
+NetflixMoviesAndTVShows/
+├── sql_queries/
 │   ├── create_tables.sql
 │   ├── data_cleaning.sql
 │   ├── analysis_queries.sql
