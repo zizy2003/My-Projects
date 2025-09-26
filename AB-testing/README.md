@@ -25,13 +25,15 @@ Analysis of landing page A/B test comparing old vs new page design to determine 
 
 ## Project Structure
 
+```
 AB-testing/
-├── rawdata/ # Original CSV datasets
-├── pandas/ # Data cleaning and exploration notebook
-├── sql/ # Database analysis queries
-├── powerbi-visualization/ # Interactive dashboards
-├── final_data/ # Processed dataset for analysis
-└── README.md # Project documentation
+├── rawdata/                # Original CSV datasets
+├── pandas/                 # Data cleaning and exploration notebook
+├── sql/                    # Database analysis queries
+├── powerbi-visualization/  # Interactive dashboards
+├── final_data/             # Processed dataset for analysis
+└── README.md               # Project documentation
+```
 
 ## Technologies Used
 
@@ -50,31 +52,21 @@ AB-testing/
 
 ### Installation Steps
 1. Clone the repository:
-git clone [repository-url]
-cd AB-testing
+   ```bash
+   git clone [repository-url]
+   cd AB-testing
+   ```
 
 2. Install dependencies:
-pip install pandas jupyter
+   ```bash
+   pip install pandas jupyter
+   ```
 
 3. Run Jupyter notebook in `pandas/` folder for data processing
 
 4. Load data into PostgreSQL and execute SQL queries from `sql/` folder
 
 5. Open Power BI file in `powerbi-visualization/` folder for interactive analysis
-
-## Methodology
-
-### Statistical Analysis
-- **Hypothesis Testing**: Two-sample t-test for conversion rate comparison
-- **Significance Level**: α = 0.05
-- **Power Analysis**: Statistical power calculation performed
-- **Effect Size**: Practical effect size computed
-
-### Data Processing Steps
-1. **Data Cleaning**: Duplicate removal and missing value handling
-2. **Feature Engineering**: Additional variables created for analysis
-3. **Statistical Testing**: Hypothesis testing for conversion rate differences
-4. **Visualization**: Charts and dashboards created for result presentation
 
 ## Results Interpretation
 
@@ -96,5 +88,3 @@ The analysis revealed that the new landing page design did not lead to a statist
 ---
 
 **Data Source**: [A/B Testing Dataset](https://www.kaggle.com/datasets/ttrngquangminh/ab-testing-dataset) from Kaggle
-
----
