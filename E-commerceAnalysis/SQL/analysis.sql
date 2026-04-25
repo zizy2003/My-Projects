@@ -89,3 +89,93 @@ FROM rfm_score
 SELECT * FROM rfm_segments
 ORDER BY monetary DESC;
 
+
+--Retention rate
+WITH monthly_customers AS (
+
+SELECT customer_id,
+DATE_TRUNC('month' , invoice_date) AS month
+FROM ecommerce_table
+WHERE customer_id != 'Guest'
+GROUP BY customer_id , DATE_TRUNC('month' , invoice_date)
+),
+retention AS (
+
+SELECT a.month,
+COUNT(DISTINCT a.customer_id) AS total_customers, 
+COUNT(DISTINCT b.customer_id) AS retained_customers,
+ROUND(COUNT(DISTINCT b.customer_id) * 100.00 / COUNT(DISTINCT a.customer_id),2) AS retention_rate
+FROM monthly_customers a
+LEFT JOIN monthly_customers b ON a.customer_id = b.customer_id
+AND b.month = a.month + INTERVAL '1 month'
+GROUP BY a.month
+
+
+)
+
+SELECT * FROM retention
+ORDER BY month;
+
+SELECT * FROM ecommerce_table
+
+--ABC products analysis
+WITH cumilative_percent AS (
+
+SELECT stock_code,
+description,
+ROUND(SUM(total_price),2)  as total_revenue,
+SUM(SUM(total_price)) OVER(ORDER BY SUM(total_price) DESC),
+SUM(SUM(total_price)) OVER(ORDER BY SUM(total_price) DESC) / SUM(SUM(total_price)) OVER() * 100.00 as cumulative_revenue
+FROM ecommerce_table
+GROUP BY stock_code, description
+)
+,
+abc_analysis AS (
+SELECT stock_code,
+description,
+CASE WHEN cumulative_revenue <= 80 THEN 'A'
+WHEN cumulative_revenue > 80  AND cumulative_revenue <= 95  THEN 'B'
+ELSE 'C'
+END AS abc
+FROM cumilative_percent
+)
+
+SELECT * FROM abc_analysis
+
+--Cohort Analysis
+WITH first_purchase AS (
+    SELECT 
+    customer_id,
+    MIN(DATE_TRUNC('month', invoice_date)) AS cohort_month
+    FROM ecommerce_table
+    WHERE customer_id != 'Guest'
+    AND total_price > 0
+    GROUP BY customer_id
+),
+all_transactions AS (
+
+SELECT customer_id , 
+DATE_TRUNC('month', invoice_date) AS transaction_month
+FROM ecommerce_table
+WHERE customer_id != 'Guest' and total_price > 0
+GROUP BY customer_id , transaction_month
+
+),
+
+cohort AS (
+SELECT a.customer_id , a.cohort_month,
+EXTRACT(YEAR FROM AGE(b.transaction_month, a.cohort_month)) * 12 +
+EXTRACT(MONTH FROM AGE(b.transaction_month, a.cohort_month)) as month_number
+FROM first_purchase a
+JOIN all_transactions b ON a.customer_id = b.customer_id
+
+)
+
+SELECT 
+cohort_month,
+month_number,
+COUNT(DISTINCT customer_id) AS total_customers
+FROM cohort
+GROUP BY cohort_month, month_number
+ORDER BY cohort_month, month_number;
+
