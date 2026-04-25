@@ -1,10 +1,11 @@
 --Total Revenue Card View
 CREATE OR REPLACE VIEW total_revenue AS
-SELECT invoice_month , ROUND(SUM(total_price)) as total_revenue
+SELECT 
+DATE_TRUNC('month', invoice_date) AS invoice_month,
+ROUND(SUM(total_price)) AS total_revenue
 FROM ecommerce_table
-GROUP BY invoice_month
-ORDER BY total_revenue DESC
-;
+GROUP BY DATE_TRUNC('month', invoice_date)
+ORDER BY invoice_month;
 
 
 --Top-10 Products by revenue View
