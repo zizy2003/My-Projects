@@ -10,12 +10,13 @@ ORDER BY invoice_month;
 
 --Top-10 Products by revenue View
 CREATE OR REPLACE VIEW top10_products_by_revenue AS
-WITH revenue_by_product AS(
+WITH revenue_by_product AS (
 SELECT stock_code,
 description , 
 ROUND(SUM(total_price)) as total_revenue ,
 DENSE_RANK() OVER(ORDER BY ROUND(SUM(total_price)) DESC) as rn
 FROM ecommerce_table
+WHERE description != 'DOTCOM POSTAGE'
 GROUP BY stock_code, description
 
 
